@@ -56,6 +56,26 @@ kubectl delete -f k8s-specifications/
 * A [Postgres](https://hub.docker.com/_/postgres/) database backed by a Docker volume
 * A [Node.js](/result) web app which shows the results of the voting in real time
 
+
+## Kind
+
+To create multinode cluster using kind 
+create a file name cluster-config.yaml
+```shell
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: test-cluster
+nodes:
+  - role: control-plane
+  - role: control-plane
+  - role: worker
+  - role: worker
+```
+Then run the following command
+```shell
+kind create cluster --config cluster-config.yaml
+```
+
 ## Notes
 
 The voting application only accepts one vote per client browser. It does not register additional votes if a vote has already been submitted from a client.
